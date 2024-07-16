@@ -43,8 +43,6 @@ async function extractSongInfo(playlistUrl) {
     }
 }
 
-// Example usage
-extractSongInfo('https://open.spotify.com/playlist/37i9dQZF1E378XSv3P3KTK');
 
 async function on_submit() {
     const playlistUrl = document.getElementById('playlistUrl').value;
