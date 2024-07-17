@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playlist</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="playlist.css">
+</head>
+<body style="background-color: var(--playful-bg-color);">
+    <div class="row" style="background-color: var(--playful-red-color); color: var(--playful-bg-color);padding:2%">
+        <div class="container text-left">
+            <h2 class="display-1" style="font-size: 2.5em; font-weight: bold; line-height: 2;">Välj Spellista</h2>
+        </div>
+        
+    </div>
+    <div style="position: absolute; top: 10px; left: 10px;">
+        <a href="home.html" class="btn btn-danger">Tillbaka</a>
+    </div>
+    <div class="container text-left">
+        <h2 class="display-1" style="font-size: 2em; font-weight: bold; line-height: 2;">Färdiga Spellistor</h2>
+        <div id="defaultPlaylists" class="list-group">
+            
+        </div>
+    </div>
+    <div class="container text-left">
+        <h2 class="display-1" style="font-size: 2em; font-weight: bold; padding-top: 1em;"> Egna Spellistor</h2>
+
+        <div id="playlist-container" class="list-group">
+            <div class="playlist-item list-group-item">
+                <img src="plus.png" alt="Playlist 1" class="img-thumbnail">
+                <span>Lägg till ny Spellista</span>
+            </div>
+            <div class="playlist-item list-group-item" onclick="showStartButton()">
+                <img src="album.jpeg" alt="Playlist 1" class="img-thumbnail">
+                <span>Playlist 1</span>
+            </div>
+            <div class="playlist-item list-group-item" onclick="showStartButton()">
+                <img src="album.jpeg" alt="Playlist 2" class="img-thumbnail">
+                <span>Playlist 2</span>
+            </div>
+            <!-- Add more playlist items as needed -->
+        </div>
+    </div>
+    <div id="menu" class="row" style="background-color: var(--playful-red-color);">
+        <button id="start-button" class="playbutton btn btn-success start-button mt-3">Starta Spelet</button>
+    </div>
+</body>
+</html>
+
+<script src="code.js"></script>
+
+<script>
+    function showStartButton() {
+        document.getElementById('menu').style.display = 'flex';
+    }
+
+    function attachPlaylistItemListeners() {
+        const playlistItems = document.querySelectorAll('.playlist-item');
+        playlistItems.forEach(item => {
+            item.addEventListener('click', () => {
+                // Remove 'selected' class from all items
+                playlistItems.forEach(i => i.classList.remove('selected'));
+                // Add 'selected' class to the clicked item
+                item.classList.add('selected');
+            });
+        });
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+        attachPlaylistItemListeners();
+    });
+</script>

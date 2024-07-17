@@ -1,0 +1,82 @@
+:root {
+    
+    --playful-bg-color: #fddbdc;
+    --playful-bg-color-lighter: #fceced;
+    --playful-blue-color: #0d3af5;
+    --playful-red-color: #f14b57;
+    --black-color: #000000;
+    --playful-green-color: #4bc540;
+    --error-color: #ff0000;
+    --playful-yellow-color: #f5f542;
+}
+
+body {
+    color: var(--playful-blue-color);
+}
+
+.playlist-item {
+    color: var(--playful-blue-color);
+    text-align: left;
+    background-color: var(--playful-bg-color);
+    overflow: hidden;
+    padding: 0.3em;
+}
+
+.img-thumbnail {
+    height: 3em;
+    width: 3em;
+}
+
+span {
+    font-size: 1em;
+    padding-left: 1em;
+}
+
+* {
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+
+#menu {
+    position: fixed;
+    bottom: 0px;
+    display: none; /* Initially hidden */
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 1em;
+}
+
+.playbutton {
+    font-size: 2.5em;
+    font-weight: bold;
+    background-color: var(--playful-green-color);
+    border: 5px solid var(--playful-bg-color);
+    color: var(--playful-bg-color);
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.playbutton:hover {
+    background-color: var(--playful-green-color);
+    transform: scale(1.1);
+}
+
+.playbutton:active {
+    transform: scale(0.9);
+}
+
+.playlist-item:hover {
+    background-color: var(--playful-bg-color-lighter);
+    cursor: pointer;
+}
+
+.playlist-item.selected {
+    background-color: var(--playful-red-color);
+    color: var(--playful-bg-color);
+}

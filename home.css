@@ -1,0 +1,73 @@
+:root {
+    
+    --playful-bg-color: #fddbdc;
+    --playful-bg-color-lighter: #fddbdc;
+    --playful-blue-color: #0d3af5;
+    --playful-red-color: #f14b57;
+    --black-color: #000000;
+    --playful-green-color: #4bc540;
+    --error-color: #ff0000;
+    --playful-yellow-color: #f5f542;
+}
+
+
+body {
+    font-family: Arial, sans-serif;
+    color: var(--black-color);
+    background-color: var(--playful-red-color);
+    padding-bottom: 10%;
+    overflow-x: hidden;
+}
+* {
+    box-sizing: border-box; /* Ensure padding and border are included in the element's total width and height */
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* Prevent horizontal scrolling */
+}
+.row {
+    padding-top: 5%;
+    background-color: var(--playful-bg-color);
+    color: var(--playful-blue-color);
+}
+
+.background {
+    border: 3vh dotted var(--playful-yellow-color);
+    background-color: var(--playful-red-color);
+    padding: 2%;
+    height: 85%;
+}
+
+.card {
+    color: var(--playful-blue-color);
+    background-color: var(--playful-bg-color);
+    padding-top: 5%;
+    padding-bottom: 5%;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.playbutton {
+    height:15%;
+    font-size: 20px;
+    font-weight: bold;
+    background-color: var(--playful-green-color);
+    border: 5px solid var(--playful-bg-color);
+    color: var(--playful-bg-color);
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.playbutton:hover {
+    background-color: var(--playful-green-color);
+    transform: scale(1.1);
+}
+
+.playbutton:active {
+    transform: scale(0.9);
+}

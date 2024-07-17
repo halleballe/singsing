@@ -1,0 +1,84 @@
+:root {
+    
+    --playful-bg-color: #fddbdc;
+    --playful-bg-color-lighter: #fceced;
+    --playful-blue-color: #0d3af5;
+    --playful-red-color: #f14b57;
+    --playful-red-color-darker: #ba3a43;
+    --black-color: #000000;
+    --playful-green-color: #4bc540;
+    --error-color: #ff0000;
+    --playful-yellow-color: #f5f542;
+}
+
+.background {
+    background-color: var(--playful-red-color);
+}
+
+.card {
+    background-color: var(--playful-bg-color);
+    border-radius: 10px;
+    color: var(--playful-red-color-darker);
+    padding: 20px;
+    position: absolute;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(600px, 90%);
+    height: min(600px, 70%);
+
+}
+.card {
+    transition: transform 1s ease
+}
+.swoosh-up {
+    animation: swoosh 1s ease-in; /* Adjust duration and easing as needed */
+}
+
+@keyframes swoosh {
+    0% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+    99% {
+        transform: translate(-50%, -50%) translateY(-100vh) rotate(30deg) translateY(-100vw);
+        opacity: 0;
+    }
+    100% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+}
+
+
+.card-border {
+    background-color: var(--playful-bg-color);
+    padding: 10px;
+    border-radius: 20px;
+}
+
+
+.playbutton {
+    font-size: 1.5em;
+    font-weight: bold;
+    background-color: var(--playful-green-color);
+    border: 5px solid var(--playful-bg-color);
+    color: var(--playful-bg-color);
+    padding: 10px 20px;
+    border-radius: 50px;
+    transition: transform 0.3s, background-color 0.3s;
+}
+
+.playbutton:hover {
+    background-color: var(--playful-green-color);
+    transform: scale(1.1);
+}
+
+.playbutton:active {
+    transform: scale(0.9);
+}
+.controls {
+    position: fixed;
+    bottom: 5px;
+    width: 100%;
+}
