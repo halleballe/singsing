@@ -16,6 +16,14 @@ async function getLyrics() {
         
     } else {
         console.error('Track index out of bounds or songsInfo not found');
+        let endCard = document.getElementById("endCard")
+        endCard.style.display="block";
+
+        let shadow = document.getElementById("shadow")
+        shadow.parentNode.removeChild(shadow);
+
+        let flashcard = document.getElementById("flashcard")
+        flashcard.parentNode.removeChild(flashcard);
     }
 // Log the artist and track
 console.log("searching for", artist, song);
@@ -46,6 +54,7 @@ try {
 
     for (let verseOrChorus of versesAndChoruses) {
         let lines = verseOrChorus.split('\n');
+        lines = lines.filter(line => line.includes(" "));
         if (lines.length >= 4) {
             let question = lines.slice(0, 2).join('<br>');
             let answer = lines.slice(2, 4).join('<br>');
@@ -61,6 +70,8 @@ try {
 
 } catch (error) {
     console.error('Error fetching lyrics:', error);
+    console.log("not found")
+    getLyrics();
     return null;
 }
     }
@@ -113,10 +124,13 @@ function NextSong(increment) {
 async function swooshCard() {
     console.log("swooshing")
     const card = document.getElementById('shadow');
-    card.classList.add('swoosh-up');
+    const randomDirection = Math.random() < 0.5 ? 'swoosh-left' : 'swoosh-right';
+    card.classList.add(randomDirection);
     setTimeout(() => {
         // Code to be executed after one second
         card.classList.remove('swoosh-up');
+        card.classList.remove('swoosh-left');
+        card.classList.remove('swoosh-right');
         const flashcardInnerHtml = document.getElementById('flashcard').innerHTML;
         document.getElementById('shadow').innerHTML = flashcardInnerHtml;
     }, 400);

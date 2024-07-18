@@ -14,36 +14,63 @@ async function getSpotifyToken() {
 }
 
 async function extractSongInfo(playlistUrl) {
-    //https://open.spotify.com/playlist/37i9dQZF1E378XSv3P3KTK
-    let playlistId = playlistUrl.split('/').pop();
-    console.log("url", playlistUrl)
-    console.log("id", playlistId)
+    console.log("this is the URL",playlistUrl)
+    let type="playlists"
+    if (playlistUrl.includes("album")){
+        console.log("this is an album")
+        type="albums"
+    }
+    let playlistId = playlistUrl.split('/').pop().split("?")[0];
+    console.log("url", playlistUrl);
+    console.log("id", playlistId);
     try {
         const token = await getSpotifyToken();
-        const response = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}`, {
+        let response = await fetch(`https://api.spotify.com/v1/${type}/${playlistId}`, {
             headers: {
                 'Authorization': 'Bearer ' + token
             }
         });
-        const data = await response.json();
 
-        const songsInfo = data.tracks.items.map(item => {
+        const data = await response.json();
+        console.log("this is the data", data)
+        let songsInfo;
+        if (type == "playlists"){
+            songsInfo = data.tracks.items.map(item => {
+            console.log("it is doing it")
             const songTitle = item.track.name;
             const firstArtist = item.track.artists[0].name;
             return { songTitle, firstArtist };
         });
-
+        }else{
+        songsInfo = [];
+        const items = data.tracks.items;
+        for (let i = 0; i < items.length; i++) {
+            console.log("it is doing it");
+            const instance = items[i];
+            const songTitle = instance.name;
+            console.log(songTitle)
+            const firstArtist = instance.artists[0].name;
+            console.log(firstArtist)
+            songsInfo.push({ songTitle, firstArtist });
+        }
+            
+        }
+       
+        console.log(songsInfo)
         return songsInfo;
     } catch (error) {
-        console.error('Error fetching the playlist:', error);
+        console.error('Error fetching the playlist or album:', error);
         return null;
     }
 }
 
 async function getImageAndNameFromPlaylist(playlistUrl) {
-    const playlistId = playlistUrl.split('/').pop();
-    console.log("url", playlistUrl);
-    console.log("id", playlistId);
+    console.log("getting image and playlist for",playlistUrl)
+    let playlistId = playlistUrl.split('/').pop();
+    playlistId  = playlistId.split("?")[0]
+
+    let coverImage = "image.jpeg";
+    let playlistName = "någonting gick fel";
     try {
         const token = await getSpotifyToken();
         
@@ -54,26 +81,36 @@ async function getImageAndNameFromPlaylist(playlistUrl) {
             }
         });
         const playlistData = await playlistResponse.json();
-        const playlistName = playlistData.name;
-
-        // Fetch playlist images
-        const imagesResponse = await fetch(`https://api.spotify.com/v1/playlists/${playlistId}/images`, {
-            headers: {
-                'Authorization': 'Bearer ' + token
-            }
-        });
-        const imagesData = await imagesResponse.json();
-        const coverImage = imagesData[0].url;
-
+        console.log("response Name", playlistResponse)
+        playlistName = playlistData.name;
+        coverImage = playlistData.images[0].url
+        
         return { coverImage, playlistName };
     } catch (error) {
-        console.error('Error fetching the playlist:', error);
-        return null;
+        //may have been an album
+        try {
+            console.log("MAY HAVE BEEN AN ALBUM")
+            // Fetch playlist data to get the name
+            const token = await getSpotifyToken();
+            const playlistResponse = await fetch(`https://api.spotify.com/v1/albums/${playlistId}`, {
+                headers: {
+                    'Authorization': 'Bearer ' + token
+                }
+            });
+            const playlistData = await playlistResponse.json();
+            playlistName = playlistData.name;
+            coverImage = playlistData.images[0].url;
+            console.log(coverImage)
+            
+            return { coverImage, playlistName };
+        }catch{
+            console.error('Error fetching the playlist:', error);
+            return { coverImage, playlistName };
+        }
+        
     }
 }
 
-// Example usage
-extractSongInfo('https://open.spotify.com/playlist/37i9dQZF1E378XSv3P3KTK');
 
 async function on_submit() {
     const playlistUrl = document.getElementById('playlistUrl').value;
@@ -98,8 +135,7 @@ async function on_submit() {
     }
 }
 
-let default_playlists=["https://open.spotify.com/playlist/1n3nyu1YGK6EBmED7M2xbc", "https://open.spotify.com/playlist/1bmOCClj7jqYfcE5112nds", "https://open.spotify.com/playlist/0HFPa0UyfmVGoSvqhalTbB"]
-
+let default_playlists=["https://open.spotify.com/playlist/1n3nyu1YGK6EBmED7M2xbc", "https://open.spotify.com/playlist/1bmOCClj7jqYfcE5112nds", "https://open.spotify.com/playlist/0HFPa0UyfmVGoSvqhalTbB", "https://open.spotify.com/playlist/4gEUNj0sdveR5y2gqQ0Sfr?si=e4ceeded8d8c4614"]
 async function populateUserPlaylists() {
     let userPlaylists = JSON.parse(localStorage.getItem('userPlaylists')) || [];
     console.log("User", userPlaylists);

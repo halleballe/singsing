@@ -31,11 +31,31 @@
 .card {
     transition: transform 0.5s ease
 }
-.swoosh-up {
-    animation: swoosh 0.5s ease-in; /* Adjust duration and easing as needed */
+.swoosh-right {
+    animation: swoosh-right 0.5s ease-in; /* Adjust duration and easing as needed */
 }
 
-@keyframes swoosh {
+@keyframes swoosh-right {
+    0% {
+        transform: translate(-50%, -50%);
+        opacity: 100;
+    }
+    99% {
+        transform: translate(-50%, -50%) translateY(-100vh) rotate(35deg) translateY(-100vw);
+        opacity: 100;
+    }
+    100% {
+        transform: translate(-50%, -50%);
+        opacity: 100;
+    }
+}
+
+.swoosh-left {
+    animation: swoosh-left 0.5s ease-in; /* Adjust duration and easing as needed */
+}
+
+
+@keyframes swoosh-left {
     0% {
         transform: translate(-50%, -50%);
         opacity: 100;
@@ -57,6 +77,10 @@
     border-radius: 20px;
 }
 
+
+#flashcard {
+    box-shadow: 5px 10px 5px var(--playful-red-color-darker)
+}
 
 .playbutton {
     font-size: 1.5em;
