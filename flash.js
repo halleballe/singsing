@@ -97,7 +97,7 @@ function NextSong(increment) {
             }
         });
     
-        document.getElementById('info').textContent = `${currentSong.firstArtist} - ${currentSong.songTitle}`;
+        document.getElementById('info').textContent = `${currentSong.firstArtist} - ${currentSong.songTitle.split(" - ")[0].split(";")[0]}`;
 
     }
     catch(e){
@@ -119,7 +119,7 @@ async function swooshCard() {
         card.classList.remove('swoosh-up');
         const flashcardInnerHtml = document.getElementById('flashcard').innerHTML;
         document.getElementById('shadow').innerHTML = flashcardInnerHtml;
-    }, 800);
+    }, 400);
     
 }
 

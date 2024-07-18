@@ -52,7 +52,7 @@ html, body {
 }
 
 .playbutton {
-    font-size: 2.5em;
+    font-size: 20px;
     font-weight: bold;
     background-color: var(--playful-green-color);
     border: 5px solid var(--playful-bg-color);
@@ -79,4 +79,113 @@ html, body {
 .playlist-item.selected {
     background-color: var(--playful-red-color);
     color: var(--playful-bg-color);
+}
+
+/* Modal styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.4); /* Semi-transparent background */
+}
+
+.modal-content {
+  background-color: var(--playful-bg-color);
+  margin: 15% auto;
+  padding: 20px;
+  border: 1px solid var(--playful-blue-color);
+  width: 80%;
+  border-radius: 10px; /* Rounded corners */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+}
+
+.close {
+  color: var(--playful-red-color);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: var(--black-color);
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+}
+
+.form-label {
+  font-size: 1.2em;
+  margin-bottom: 0.5em;
+}
+
+.form-control {
+  padding: 0.5em;
+  font-size: 1em;
+  border: 1px solid var(--playful-blue-color);
+  border-radius: 5px;
+}
+
+.btn-success {
+    width:150px;
+    font-size: 20px;
+    background-color: var(--playful-green-color);
+    border: 5px solid var(--playful-bg-color);
+    color: var(--playful-bg-color);
+    padding: 10px 20px;
+    border-radius: 50px;
+}
+
+.btn-success:hover {
+  background-color: var(--playful-green-color);
+  transform: scale(1.1);
+}
+
+.btn-success:active {
+  transform: scale(0.9);
+}
+
+.start-button:hover {
+    background-color: var(--playful-green-color);
+    transform: scale(1.1);
+
+    color: white;
+  }
+  
+  .start-button:active {
+    transform: scale(0.9);
+    color: white;
+  }
+
+/* Add styles for the delete button */
+.delete-button {
+    background-color: var(--playful-bg-color);
+    color: var(--playful-red-color);
+    border: none;
+    padding: 5px 5px;
+    margin-right: 10px; /* Anchor delete button to the right */
+    cursor: pointer;
+    border-radius: 5px;
+}
+
+.delete-button:hover {
+    background-color: var(--playful-blue-color);
+    color: var(--playful-bg-color);
+}
+
+.playlist-item .delete-button {
+    display: none; /* Hide delete button by default */
+}
+
+.playlist-item.selected .delete-button {
+    display: inline-block; /* Show delete button when playlist item is selected */
 }

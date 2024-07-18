@@ -100,7 +100,41 @@ async function on_submit() {
 
 let default_playlists=["https://open.spotify.com/playlist/1n3nyu1YGK6EBmED7M2xbc", "https://open.spotify.com/playlist/1bmOCClj7jqYfcE5112nds", "https://open.spotify.com/playlist/0HFPa0UyfmVGoSvqhalTbB"]
 
-async function populatePlaylists() {
+async function populateUserPlaylists() {
+    let userPlaylists = JSON.parse(localStorage.getItem('userPlaylists')) || [];
+    console.log("User", userPlaylists);
+    document.getElementById('userPlaylists').innerHTML = '<div class="playlist-item list-group-item add-new"><img src="plus.png" alt="Playlist 1" class="img-thumbnail"><span>Lägg till ny Spellista</span></div>'; // Clear existing items
+    document.querySelector('.playlist-item.add-new').addEventListener('click', showAddPlaylistModal);
+    userPlaylists.forEach(async (playlistUrl) => {
+        const { coverImage, playlistName } = await getImageAndNameFromPlaylist(playlistUrl);
+        const playlistItem = document.createElement('div');
+        playlistItem.classList.add('playlist-item', 'list-group-item');
+        playlistItem.onclick = showStartButton;
+        playlistItem.innerHTML = `
+        <div class="playlist-content" style="display: flex; justify-content: space-between; align-items: center;">
+            <div style="display: flex; align-items: center;">
+                <img src="${coverImage}" alt="${playlistName}" class="img-thumbnail">
+                <span>${playlistName}</span>
+                <input type="hidden" value="${playlistUrl}">
+            </div>
+            <button class="delete-button">Delete</button>
+        </div>
+    `;
+        document.getElementById('userPlaylists').appendChild(playlistItem);
+        attachPlaylistItemListeners(); // Attach listeners to new items
+
+        // Add delete button functionality
+        playlistItem.querySelector('.delete-button').addEventListener('click', (event) => {
+            event.stopPropagation(); // Prevent triggering the playlist item click
+            userPlaylists = userPlaylists.filter(url => url !== playlistUrl);
+            localStorage.setItem('userPlaylists', JSON.stringify(userPlaylists));
+            populateUserPlaylists(); // Refresh the list
+        });
+    });
+}
+
+async function populateDefaultPlaylists() {
+    console.log("Default",userPlaylists)
     default_playlists.forEach(async (playlistUrl) => {
         const { coverImage, playlistName } = await getImageAndNameFromPlaylist(playlistUrl);
         const playlistItem = document.createElement('div');
@@ -145,4 +179,34 @@ async function getSelectedPlaylistUrl() {
 
 document.getElementById('start-button').addEventListener('click', getSelectedPlaylistUrl);
 
-populatePlaylists();
+// Function to show the modal
+function showAddPlaylistModal() {
+    const modal = document.getElementById('addPlaylistModal');
+    modal.style.display = 'block';
+}
+
+// Function to hide the modal
+function hideAddPlaylistModal() {
+    const modal = document.getElementById('addPlaylistModal');
+    modal.style.display = 'none';
+}
+
+// Event listener for closing the modal
+document.querySelector('.close').addEventListener('click', hideAddPlaylistModal);
+
+// Event listener for form submission
+document.getElementById('addPlaylistForm').addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const playlistUrl = document.getElementById('playlistUrlInput').value;
+    let userPlaylists = JSON.parse(localStorage.getItem('userPlaylists')) || [];
+    userPlaylists.push(playlistUrl);
+    localStorage.setItem('userPlaylists', JSON.stringify(userPlaylists));
+    await populateUserPlaylists();
+    hideAddPlaylistModal();
+});
+
+// Add event listener to the list item
+
+
+populateDefaultPlaylists();
+populateUserPlaylists();

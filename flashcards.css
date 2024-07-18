@@ -25,28 +25,28 @@
     left: 50%;
     transform: translate(-50%, -50%);
     width: min(600px, 90%);
-    height: min(600px, 70%);
+    height: min(600px, 85%);
 
 }
 .card {
-    transition: transform 1s ease
+    transition: transform 0.5s ease
 }
 .swoosh-up {
-    animation: swoosh 1s ease-in; /* Adjust duration and easing as needed */
+    animation: swoosh 0.5s ease-in; /* Adjust duration and easing as needed */
 }
 
 @keyframes swoosh {
     0% {
         transform: translate(-50%, -50%);
-        opacity: 1;
+        opacity: 100;
     }
     99% {
         transform: translate(-50%, -50%) translateY(-100vh) rotate(30deg) translateY(-100vw);
-        opacity: 0;
+        opacity: 100;
     }
     100% {
         transform: translate(-50%, -50%);
-        opacity: 1;
+        opacity: 100;
     }
 }
 
@@ -72,10 +72,12 @@
 .playbutton:hover {
     background-color: var(--playful-green-color);
     transform: scale(1.1);
+    color: var(--playful-bg-color);
 }
 
 .playbutton:active {
     transform: scale(0.9);
+    color: var(--playful-bg-color);
 }
 .controls {
     position: fixed;
