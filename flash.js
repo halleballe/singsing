@@ -55,6 +55,9 @@ try {
     for (let verseOrChorus of versesAndChoruses) {
         let lines = verseOrChorus.split('\n');
         lines = lines.filter(line => line.includes(" "));
+                if (lines[0] === lines[1]) {
+            lines = lines.slice(2);
+        }
         if (lines.length >= 4) {
             let question = lines.slice(0, 2).join('<br>');
             let answer = lines.slice(2, 4).join('<br>');
