@@ -55,6 +55,7 @@ try {
     for (let verseOrChorus of versesAndChoruses) {
         let lines = verseOrChorus.split('\n');
         lines = lines.filter(line => line.includes(" "));
+        console.log("checking identical lines")
                 if (lines[0] === lines[1]) {
             lines = lines.slice(2);
                     console.log("identical lines removed");
