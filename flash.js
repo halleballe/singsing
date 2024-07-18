@@ -98,7 +98,7 @@ function NextSong(increment) {
         let questionElement = document.getElementById('question');
         questionElement.innerHTML = question;
         let answerElement = document.getElementById('answer');
-        answerElement.innerHTML = '<span class="hidden-answer">Tap to show</span>';
+        answerElement.innerHTML = '<span class="hidden-answer">Tryck för att visa</span>';
         answerElement.dataset.answer = answer;
     
         // Add event listener to toggle answer visibility
