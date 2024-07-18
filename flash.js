@@ -57,6 +57,7 @@ try {
         lines = lines.filter(line => line.includes(" "));
                 if (lines[0] === lines[1]) {
             lines = lines.slice(2);
+                    console.log("identical lines removed");
         }
         if (lines.length >= 4) {
             let question = lines.slice(0, 2).join('<br>');
