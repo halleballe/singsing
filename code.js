@@ -135,7 +135,7 @@ async function on_submit() {
     }
 }
 
-let default_playlists=["https://open.spotify.com/playlist/1n3nyu1YGK6EBmED7M2xbc", "https://open.spotify.com/playlist/1bmOCClj7jqYfcE5112nds", "https://open.spotify.com/playlist/0HFPa0UyfmVGoSvqhalTbB", "https://open.spotify.com/playlist/4gEUNj0sdveR5y2gqQ0Sfr?si=e4ceeded8d8c4614", "https://open.spotify.com/playlist/37i9dQZF1DZ06evO2iBPiw?si=fd39834856994e25"]
+let default_playlists=["https://open.spotify.com/playlist/1n3nyu1YGK6EBmED7M2xbc", "https://open.spotify.com/playlist/1bmOCClj7jqYfcE5112nds", "https://open.spotify.com/playlist/0HFPa0UyfmVGoSvqhalTbB", "https://open.spotify.com/playlist/4gEUNj0sdveR5y2gqQ0Sfr?si=e4ceeded8d8c4614", "https://open.spotify.com/playlist/5FAJg17Von0Mc8jkHUJQDf?si=d5e268ddfc764780"]
 async function populateUserPlaylists() {
     let userPlaylists = JSON.parse(localStorage.getItem('userPlaylists')) || [];
     console.log("User", userPlaylists);
