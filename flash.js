@@ -1,12 +1,72 @@
+async function geniusLyrics(){
+    let artist;
+    let song;
+    track += 1;
+    let songsInfo = JSON.parse(localStorage.getItem('songsInfo'));
+    songsInfo=songsInfo[0]
+    console.log(songsInfo.length)
+    console.log(!!songsInfo)
+    console.log(!!(track<songsInfo.length))
+    console.log(!!(track>=0))
+    
+    if (songsInfo && track < songsInfo.length && track >= 0) {
+        console.log(track)
+        let currentSong = songsInfo[track];
+        //save everything in local storage
+        localStorage.setItem('currentSong', JSON.stringify(currentSong));
+        artist = currentSong.firstArtist
+        song = currentSong.songTitle
+        console.log("inside",artist, song)
+        
+    } else {
+        console.error('Track index out of bounds or songsInfo not found');
+        let endCard = document.getElementById("endCard")
+        endCard.style.display="block";
+
+        let shadow = document.getElementById("shadow")
+        shadow.parentNode.removeChild(shadow);
+
+        let flashcard = document.getElementById("flashcard")
+        flashcard.parentNode.removeChild(flashcard);
+    }
+
+    //now we have artist and stuff
+    console.log("searching for", artist, song);
+
+    //prepare the artist name:
+    artist = artist.replace(" ", "-")
+    song = song.replace(" ", "-")
+    let url = `https://genius.com/${artist}-${song}-lyrics`
+    const corsAnywhereUrl = 'https://cors-anywhere.herokuapp.com/';
+    url = corsAnywhereUrl + url;
+
+    try {
+        // Fetch the HTML content
+        const response = await fetch(url);
+        const text = await response.text();
+    
+        // Parse the HTML content
+        const parser = new DOMParser();
+        const doc = parser.parseFromString(text, 'text/html');
+
+        let lyrics_container_class = "Lyrics__Container-sc-1ynbvzw-1 kUgSbL"
+
+        const lyricsContainer = doc.querySelector('.Lyrics__Container-sc-1ynbvzw-1.kUgSbL');
+
+        console.log(lyricsContainer.innerHTML)
+
+
+        }catch{console.log("woops")}
+    }
+
 async function getLyrics() {
-    let count=100
-    while(count){
-        count--;
     //when flashcard is updated, prepare the next card
     track += 1;
     let artist;
     let song;
-    let songsInfo = JSON.parse(localStorage.getItem('songsInfo'));
+    let songsInfo = JSON.parse(localStorage.getItem('songsInfo'))[0];
+    console.log("inside get lyrics:SongsInfo is:", songsInfo)
+    console.log(songsInfo.length)
     if (songsInfo && track < songsInfo.length && track >= 0) {
         let currentSong = songsInfo[track];
         //save everything in local storage
@@ -54,11 +114,9 @@ try {
 
     for (let verseOrChorus of versesAndChoruses) {
         let lines = verseOrChorus.split('\n');
-        lines = lines.filter(line => (line.length>4));
-        console.log("checking identical lines")
-                if (lines[0] === lines[1]) {
+        lines = lines.filter(line => line.includes(" "));
+        if (lines[0] === lines[1]) {
             lines = lines.slice(2);
-                    console.log("identical lines removed");
         }
         if (lines.length >= 4) {
             let question = lines.slice(0, 2).join('<br>');
@@ -80,7 +138,7 @@ try {
     return null;
 }
     }
-    }
+    
         
         
 
@@ -103,7 +161,7 @@ function NextSong(increment) {
         let questionElement = document.getElementById('question');
         questionElement.innerHTML = question;
         let answerElement = document.getElementById('answer');
-        answerElement.innerHTML = '<span class="hidden-answer">Tryck för att visa</span>';
+        answerElement.innerHTML = '<span class="hidden-answer">Tap to show</span>';
         answerElement.dataset.answer = answer;
     
         // Add event listener to toggle answer visibility

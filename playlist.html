@@ -3,10 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>SingSing</title>
+    <title>Playlist</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="playlist.css">
-    <link rel="icon" type="image/png" href="icon.png">
 </head>
 <body style="background-color: var(--playful-bg-color);">
     <div class="row" style="background-color: var(--playful-red-color); color: var(--playful-bg-color);padding:2%">
@@ -21,7 +20,7 @@
             
         </div>
     </div>
-    <div class="container text-left">
+    <div class="container text-left" style="padding-bottom: 200px">
         <h2 class="display-1" style="font-size: 2em; font-weight: bold; padding-top: 1em;"> Från Spotify</h2>
 
         <div id="userPlaylists" class="list-group">
@@ -31,8 +30,8 @@
     <div id="menu" class="row" style="background-color: var(--playful-red-color);">
         <button id="start-button" class="playbutton btn start-button mt-3">Starta Spelet</button>
     </div>
-    <div style="position: absolute; bottom: 10px; left: 10px;opacity: 100%;">
-        <a href="/" class="btn btn-danger">Hem</a>
+    <div style="position: fixed; bottom: 10px; left: 10px;opacity: 100%;">
+        <a href="home.html" class="btn btn-danger">Hem</a>
     </div>
 
     <!-- Modal -->
@@ -47,13 +46,11 @@
           </div>
         </form>
         <h2 class="display-1" style="font-size: 1.5em; font-weight: bold; line-height: 2;">Hur gör man?</h2>
-        <p style="font-size: 1em; line-height: 2;">1. Öppna Spotify appen<br>2. Gå till Spellistan du vill använda <br> 3. Tryck på ikonen med tre prickar <br> 4. Gå till Dela > Kopiera Spellistlänk <br> <br> <strong> Problem?</strong> Kontrollera att listan inte är privat</p>
+        <p style="font-size: 1em; line-height: 2;">1. Öppna Spotify appen<br>2. Gå till Spellistan du vill använda <br> 3. Tryck på ikonen med tre prickar <br> 4. Gå till Dela > Kopiera Spellistlänk <br> <br> <strong> Problem?</strong> Album fungerar inte, endast spellistor. Kontrollera att listan inte är privat </p>
       </div>
     </div>
 </body>
 </html>
-
-<script src="code.js"></script>
 
 <script>
     function showStartButton() {
@@ -76,3 +73,6 @@
         attachPlaylistItemListeners();
     });
 </script>
+
+<script src="code.js"></script>
+
