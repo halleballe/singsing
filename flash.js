@@ -64,7 +64,7 @@ async function getLyrics() {
     track += 1;
     let artist;
     let song;
-    let songsInfo = JSON.parse(localStorage.getItem('songsInfo'))[0];
+    let songsInfo = JSON.parse(localStorage.getItem('songsInfo'));
     console.log("inside get lyrics:SongsInfo is:", songsInfo)
     console.log(songsInfo.length)
     if (songsInfo && track < songsInfo.length && track >= 0) {
