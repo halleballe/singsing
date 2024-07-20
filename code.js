@@ -29,7 +29,7 @@ async function extractSongInfo(playlistUrl, page=0) {
     if (urls.includes(playlistUrl)){
         //this is a default playlist. get from the library of saved songInfo
         const songsInfo = default_data[playlistId];
-        return songsInfo;
+        return shuffle(songsInfo);
     }
     
     try {
