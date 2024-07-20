@@ -44,7 +44,7 @@ async function extractSongInfo(playlistUrl, page=0) {
     
             const data = await response.json();
             console.log("this is the data", data)
-
+alert(response.data);
             // Concatenate new songs to songsInfo
             songsInfo = songsInfo.concat(data.items.map(item => {
             console.log("it is doing it")
@@ -60,6 +60,7 @@ async function extractSongInfo(playlistUrl, page=0) {
             });
     
             const data = await response.json();
+            alert(response)
             console.log("this is the data", data)
             const items = data.tracks.items;
             for (let i = 0; i < items.length; i++) {
